@@ -8,7 +8,7 @@ interface RenderContestType {
     link : string;
 }
 
-export default async function Leetcode() {
+export default async function AllContests() {
     const response = await axios.get(
         "http://localhost:3000/api/contest?source=all&day=all&month=all&sortBy=startTime&sortOrder=asc"
     );
@@ -38,9 +38,15 @@ export default async function Leetcode() {
 function RenderContest({source, startTime, title, link }: RenderContestType) {
     const time = new Date(startTime * 1000);
 
-    const hours = time.getHours();
-    const minutes = "0" + time.getMinutes();
+    let hours = time.getHours().toString();
+    let minutes = time.getMinutes().toString();
     const seconds = "0" + time.getSeconds();
+    if(Number(hours) < 10){
+        hours = "0" + hours.toString();
+    }
+    if(Number(minutes) < 10){
+        minutes = "0" + minutes.toString();
+    }
     const formattedTime = hours + ":" + minutes;
 
     const months = [

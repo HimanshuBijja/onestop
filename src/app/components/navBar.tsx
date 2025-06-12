@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function NavBar() {
     return (
@@ -7,10 +8,10 @@ export default function NavBar() {
                 <div>
                     <Image src="/logo.png" alt="logo" width={45} height={45} />
                 </div>
-                <div className="text-green-text text-contest-title font-sans">OneStop</div>
+                <div className="text-green-text text-[30px] font-sans">OneStop</div>
             </div>
             <div className="flex gap-12 items-center">
-                <div>Contests</div>
+                <Link href="/contests">Contests</Link>
                 <ProfileCard />
             </div>
         </section>
