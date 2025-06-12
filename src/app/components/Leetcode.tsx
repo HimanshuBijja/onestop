@@ -1,13 +1,11 @@
 import axios from "axios";
-import { useState } from "react";
-import Input from "./Input";
-import { title } from "process";
-import Card from "./Card";
+import ContestCard from "./contestCard";
 
 interface RenderContestType {
     startTime: number;
     title: string;
     source : string;
+    link : string;
 }
 
 export default async function Leetcode() {
@@ -22,12 +20,13 @@ export default async function Leetcode() {
 
     return (
         <section className="relative py-24 px-4">
-            <div className=" container mx-auto  grid grid-cols-2">
+            <div className="flex flex-col gap-7">
                 {upcomingContests.map((x: RenderContestType, index:any) => (
                     <RenderContest
                         source={x.source}
                         title={x.title}
                         startTime={Number(x.startTime)}
+                        link={x.link}
                         key={index}
                     />
                 ))}
@@ -36,7 +35,7 @@ export default async function Leetcode() {
     );
 }
 
-function RenderContest({source, startTime, title }: RenderContestType) {
+function RenderContest({source, startTime, title, link }: RenderContestType) {
     const time = new Date(startTime * 1000);
 
     const hours = time.getHours();
@@ -68,7 +67,7 @@ function RenderContest({source, startTime, title }: RenderContestType) {
         <div className="">
            
 
-            <Card  source={source} label={title} time={formattedTime} date={formattedDate} />
+            <ContestCard  source={source} label={title} time={formattedTime} date={formattedDate} url={link} />
 
 
         </div>
