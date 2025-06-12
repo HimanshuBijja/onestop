@@ -20,7 +20,7 @@ export default async function AllContests() {
 
     return (
         <section className="relative py-24 px-4">
-            <div className="flex flex-col gap-7">
+            <div className="flex flex-col gap-7 justify-center">
                 {upcomingContests.map((x: RenderContestType, index:any) => (
                     <RenderContest
                         source={x.source}

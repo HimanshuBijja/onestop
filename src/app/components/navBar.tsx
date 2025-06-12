@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function NavBar() {
     return (
-        <section className="container mx-auto bg-surface rounded-normal px-7 py-2 flex justify-between items-center mt-8">
+        <section className="container mx-auto max-w-[74vw] bg-surface rounded-normal px-7 py-2 flex justify-between items-center mt-8">
             <div className="flex gap-5">
                 <div>
                     <Image src="/logo.png" alt="logo" width={45} height={45} />

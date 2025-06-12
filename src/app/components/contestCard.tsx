@@ -56,7 +56,7 @@ export default function ContestCard({
                 </div>
                 <div className="flex flex-col gap-1">
                     <div className="text-contest-title">{label}</div>
-                    <div className="flex gap-2 items-baseline-last">
+                    <div className="flex gap-2 items-baseline-last pl-3">
                         <div className="text-time text-green-text">{time}</div>
                         <div>{date}</div>
                     </div>
