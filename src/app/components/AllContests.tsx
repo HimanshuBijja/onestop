@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import axios from "axios";
 import ContestCard from "./contestCard";
 
@@ -8,38 +11,58 @@ interface RenderContestType {
     link: string;
 }
 
-export default async function AllContests() {
-    try {
-        const baseUrl = process.env.VERCEL_ENV === "development"
-        ? "http://localhost:3000"
-        : `https://${process.env.VERCEL_URL}`;
+export default function AllContests() {
+    const [upcomingContests, setUpcomingContests] = useState<
+        RenderContestType[]
+    >([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
 
-        const response = await axios.get(
-            `${baseUrl}/api/contest?source=all&day=all&month=all&sortBy=startTime&sortOrder=asc`
-        );
-        const upcomingContests = response.data.upcomingContests;
+    useEffect(() => {
+        const fetchContests = async () => {
+            try {
+                const response = await axios.get(
+                    `/api/contest?source=all&day=all&month=all&sortBy=startTime&sortOrder=asc`
+                );
+                setUpcomingContests(response.data.upcomingContests);
+                setLoading(false);
+            } catch (error) {
+                console.error(error);
+                setError(true);
+                setLoading(false);
+            }
+        };
 
+        fetchContests();
+    }, []);
+
+    if (loading) {
         return (
-            <section className="relative py-24 px-4">
-                <div className="flex flex-col gap-7 justify-center">
-                    {upcomingContests.map(
-                        (x: RenderContestType, index: any) => (
-                            <RenderContest
-                                source={x.source}
-                                title={x.title}
-                                startTime={Number(x.startTime)}
-                                link={x.link}
-                                key={index}
-                            />
-                        )
-                    )}
-                </div>
-            </section>
+            <div className="flex justify-center items-center h-screen">
+                Loading contests...
+            </div>
         );
-    } catch (error) {
-        console.error(error);
+    }
+
+    if (error) {
         return <div>Error fetching contests</div>;
     }
+
+    return (
+        <section className="relative py-24 px-4">
+            <div className="flex flex-col gap-7 justify-center">
+                {upcomingContests.map((x: RenderContestType, index: number) => (
+                    <RenderContest
+                        source={x.source}
+                        title={x.title}
+                        startTime={Number(x.startTime)}
+                        link={x.link}
+                        key={index}
+                    />
+                ))}
+            </div>
+        </section>
+    );
 }
 
 function RenderContest({ source, startTime, title, link }: RenderContestType) {

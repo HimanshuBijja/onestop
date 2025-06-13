@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 
@@ -52,7 +54,6 @@ export default function ContestCard({
                             height={60}
                         />
                     )}
-                    
                 </div>
                 <div className="flex flex-col gap-1">
                     <div className="text-contest-title">{label}</div>
@@ -67,7 +68,7 @@ export default function ContestCard({
     );
 }
 
-function VisitButton({url}: {url: string}) {
+function VisitButton({ url }: { url: string }) {
     return (
         <div className="bg-green-text/70 hover:bg-green-text transition-all duration-300 rounded-normal px-7 py-2 flex items-center text-foreground-dark font-medium">
             <Link href={url}>Visit</Link>
