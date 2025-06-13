@@ -10,10 +10,9 @@ interface RenderContestType {
 
 export default async function AllContests() {
     try {
-        const baseUrl =
-            process.env.NODE_ENV === "production"
-                ? `https://${process.env.VERCEL_URL}`
-                : "http://localhost:3000";
+        const baseUrl = process.env.VERCEL_ENV === "development"
+        ? "http://localhost:3000"
+        : `https://${process.env.VERCEL_URL}`;
 
         const response = await axios.get(
             `${baseUrl}/api/contest?source=all&day=all&month=all&sortBy=startTime&sortOrder=asc`
