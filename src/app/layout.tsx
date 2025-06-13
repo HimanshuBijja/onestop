@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Rosarivo } from "next/font/google";
 import "./globals.css";
 import NavBar from "./components/navBar";
 
@@ -11,6 +11,12 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const rosarivo = Rosarivo({
+  variable: "--font-rosarivo",
+  subsets: ["latin"],
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -35,7 +41,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Outfit:wght@100..900&display=swap" rel="stylesheet"/>
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${rosarivo.variable} container mx-auto max-w-[74vw]`}
       >
         <NavBar />
         {children}
