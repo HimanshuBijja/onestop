@@ -10,7 +10,7 @@ interface RenderContestType {
 
 export default async function AllContests() {
     const response = await axios.get(
-        "http://localhost:3000/api/contest?source=all&day=all&month=all&sortBy=startTime&sortOrder=asc"
+        "https://https://onestop-code.vercel.app/api/contest?source=all&day=all&month=all&sortBy=startTime&sortOrder=asc"
     );
     const upcomingContests = response.data.upcomingContests;
 
