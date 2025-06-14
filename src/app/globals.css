@@ -18,7 +18,7 @@
 
   --radius-normal: 20px;
 
-  
+  --breakpoint-xl: 1340px
 }
 
 @layer base {
