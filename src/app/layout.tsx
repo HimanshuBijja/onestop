@@ -41,7 +41,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Outfit:wght@100..900&display=swap" rel="stylesheet"/>
       </head>
       <body
-        className={`${rosarivo.variable} container mx-auto max-w-[74vw]`}
+        className={`${rosarivo.variable} container mx-auto xl:max-w-[74vw]`}
       >
         <NavBar />
         {children}

@@ -32,7 +32,7 @@ export default function Home() {
                             Everything
                         </motion.div>
                     </div>
-                    <div className="text-center mx-[17%] ">
+                    <div className="text-center ">
                         <div>
                             We've created a streamlined platform with careful
                         </div>
