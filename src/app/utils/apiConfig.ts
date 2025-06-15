@@ -91,6 +91,9 @@ export const CODECHEF_CONTESTS_ENDPOINT =
     "https://www.codechef.com/api/list/contests/all?sort_by=START&sorting_order=asc&offset=0&mode=all";
 
 
+    // https://codeforces.com/api/user.status?handle=Sadek_Mohammad   total problems solved filter using verdict = ok
+
+
 /*
 
 query userContestRankingInfo($username: String!) {
