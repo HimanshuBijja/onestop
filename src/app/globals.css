@@ -15,8 +15,10 @@
   --text-normal: 18px;
   --text-contest-title: 24px;
   --text-time: 14px;
+  --text-small: 12px;
 
   --radius-normal: 20px;
+  --radius-curved: 30px;
 
   --breakpoint-xl: 1340px
 }

@@ -18,6 +18,7 @@ export async function fetchUserData({
         if (!cfusername) {
             //checked everything is working fine
             return {
+                source: "codeforces",
                 success: false,
                 msg: "Enter Username",
             };
@@ -32,12 +33,14 @@ export async function fetchUserData({
                     }
                 );
                 return {
+                    source: "codeforces",
                     success: true,
                     msg: "Success",
                     data: codeforcesFullResponse.data,
                 };
             } catch (error) {
                 return {
+                    source: "codeforces",
                     success: false,
                     msg: "Incorrect Username",
                 };
@@ -49,6 +52,7 @@ export async function fetchUserData({
         if (!gfgusername) {
             // checked everything
             return {
+                source: "geeksforgeeks",
                 success: false,
                 msg: "Enter Username",
             };
@@ -98,12 +102,14 @@ export async function fetchUserData({
                 }
 
                 return {
+                    source: "geeksforgeeks",
                     success: true,
                     msg: "Success",
                     data: response,
                 };
             } catch (error) {
                 return {
+                    source: "geeksforgeeks",
                     success: false,
                     msg: "Incorrect Username",
                 };
@@ -115,6 +121,7 @@ export async function fetchUserData({
         if (!lcusername) {
             // checked everything is working fine
             return {
+                source: "leetcode",
                 success: false,
                 msg: "Enter Username",
             };
@@ -134,6 +141,7 @@ export async function fetchUserData({
                 );
                 if (leetcodeResponseProblem.data.data.matchedUser === null) {
                     return {
+                        source: "leetcode",
                         success: false,
                         msg: "Incorrect Username",
                     };
@@ -159,6 +167,7 @@ export async function fetchUserData({
                             .userContestRankingHistory
                     );
                     return {
+                        source: "leetcode",
                         success: true,
                         msg: "Success",
                         lcProblemsSolved,
@@ -167,6 +176,7 @@ export async function fetchUserData({
                 }
             } catch (error) {
                 return {
+                    source: "leetcode",
                     success: false,
                     msg: "Incorrect Username",
                 };
