@@ -9,6 +9,8 @@ import { lcattendedUserContests } from "lib/app/utils/filterUserData";
 import { lcsimplifiedUserData } from "lib/app/utils/simplifiedUserData";
 import { usernameTypes } from "lib/app/utils/types";
 
+const GFG_Hash = ""
+
 export async function fetchUserData({
     lcusername,
     cfusername,

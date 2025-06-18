@@ -64,11 +64,14 @@ function ButtonFilled() {
     )
 }
 function ButtonHollow() {
+    const router = useRouter();
     return (
         <div className="bg-transparent text-foreground px-13 py-3 rounded-[30px] font-medium border border-green-text hover:bg-surface/50 hover:border-green-text/50 transition-all duration-300">
-            <div>
+            <button onClick={() => {
+                router.push("/profiles");
+            }}>
                 Get Started
-            </div>
+            </button>
         </div>
     )
 }

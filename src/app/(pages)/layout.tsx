@@ -1,4 +1,6 @@
-import NavBar from "../components/navBar";
+"use client";
+
+import { RecoilRoot } from "recoil";
 
 export default function RootLayout({
   children,
@@ -9,7 +11,9 @@ export default function RootLayout({
     <>
       
       <main>
-        {children}
+        <RecoilRoot>
+          {children}
+        </RecoilRoot>
       </main>
     </>
   );
