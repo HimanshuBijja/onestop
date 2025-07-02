@@ -14,6 +14,8 @@ export default function Profiles() {
    const cfUsername = localStorage.getItem("codeforces") ?? false;
    const gfgUsername = localStorage.getItem("geeksforgeeks") ?? false;
 
+   const [loading, setLoading] = useState<boolean>(false);
+
     useEffect(() => {
         const fetchProfiles = async () => {
             const response = await axios.get(
