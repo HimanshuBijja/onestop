@@ -11,9 +11,7 @@ export default function RootLayout({
     <>
       
       <main>
-        <RecoilRoot>
           {children}
-        </RecoilRoot>
       </main>
     </>
   );

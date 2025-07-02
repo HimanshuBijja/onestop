@@ -1,6 +1,6 @@
 "use client"
 
-import { lcUserdata } from "lib/app/utils/atoms/profile"
+import { lcUserdata } from "lib/atoms/profile"
 import { Suspense } from "react"
 import { RecoilRoot, useRecoilValue, useRecoilValueLoadable } from "recoil"
 
