@@ -29,7 +29,12 @@ export default function GeeksforGeeksUserData() {
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
 const ProfileCard = () => {
-    const username = localStorage.getItem("geeksforgeeks") ?? "";
+    const [username, setUsername] = useState<string>("");
+
+    useEffect(() => {
+        const stored = localStorage.getItem("geeksforgeeks") ?? "";
+        setUsername(stored);
+    }, []);
     const { data, error, mutate } = useSWR(
         `/api/user/geeksforgeeks?gfgusername=${username}`,
         fetcher,

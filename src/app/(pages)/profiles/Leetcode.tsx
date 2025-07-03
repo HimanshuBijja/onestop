@@ -27,7 +27,12 @@ export default function LeetcodeUserData() {
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
 const ProfileCard = () => {
-    const username = localStorage.getItem("leetcode") ?? "";
+    const [username, setUsername] = useState<string>("");
+
+    useEffect(() => {
+        const stored = localStorage.getItem("leetcode") ?? "";
+        setUsername(stored);
+    }, []);
     const { data, error, mutate } = useSWR(
         `/api/user/leetcode?lcusername=${username}`,
         fetcher,

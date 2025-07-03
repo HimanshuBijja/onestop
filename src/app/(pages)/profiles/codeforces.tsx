@@ -28,7 +28,12 @@ export default function CodeforcesUserData() {
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
 const ProfileCard = () => {
-    const username = localStorage.getItem("codeforces") ?? "";
+    const [username, setUsername] = useState<string>("");
+
+    useEffect(() => {
+        const stored = localStorage.getItem("codeforces") ?? "";
+        setUsername(stored);
+    }, []);
     const { data, error, mutate } = useSWR(
         `/api/user/codeforces?cfusername=${username}`,
         fetcher,
