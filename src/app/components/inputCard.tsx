@@ -10,12 +10,14 @@ export default function InputCard({
     source,
     refetch,
     toggleMenu,
+    updateUsername,
 }: {
     success: boolean;
     label: string;
     source: string;
     refetch: () => void;
     toggleMenu: () => void;
+    updateUsername?: (newUsername: string) => void;
 }) {
     const [username, setUsername] = useState<string>(
         localStorage.getItem(source) || ""
@@ -27,10 +29,14 @@ export default function InputCard({
         const fetching = username !== localStorage.getItem(source)
         
         localStorage.setItem(source, username);
+        if (updateUsername) {
+            updateUsername(username);
+            // toggleMenu();
+        }
         if (fetching) {
             refetch();
         }
-        toggleMenu();
+        // toggleMenu();
         setLoading(true);
 
         // setFetching(true);

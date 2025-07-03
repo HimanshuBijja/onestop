@@ -7,7 +7,7 @@ import { AlignJustify, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
 import useSWR from "swr";
 import UserCardSkeleton from "lib/app/components/userCardSkeleton";
 
@@ -46,6 +46,9 @@ const ProfileCard = () => {
     const handleToggleMenu = () => {
         setIsOpen(!isOpen);
     };
+    const updateUsername = useCallback((newUsername: string) => {
+        setUsername(newUsername);
+    }, []);
      if(isLoading){
             return <UserCardSkeleton />
         }
@@ -86,6 +89,7 @@ const ProfileCard = () => {
                         source={data.source}
                         refetch={refetch}
                         toggleMenu={handleToggleMenu}
+                        updateUsername={updateUsername}
                     />
                 ) : isOpen ? (
                     <InputCard
@@ -94,6 +98,7 @@ const ProfileCard = () => {
                         source={data.source}
                         refetch={refetch}
                         toggleMenu={handleToggleMenu}
+                        updateUsername={updateUsername}
                     />
                 ) : (
                     <CodeForcesProfile data={data} />
@@ -111,11 +116,11 @@ const ProfileCard = () => {
 
 const CodeForcesProfile = ({ data }: { data: any }) => {
 
-    const userData = data.data.result[0];
-    const rating = userData.rating;
-    const maxRating = userData.maxRating;
-    const rank = (userData.rank).charAt(0).toUpperCase() + (userData.rank).slice(1);
-    const friendOfCount = userData.friendOfCount;
+    const userData = data.data.result[0] ?? "-";
+    const rating = userData.rating ?? "-";
+    const maxRating = userData.maxRating ?? "-";
+    const rank = userData.rank ?? "-";
+    const friendOfCount = userData.friendOfCount ?? "-";
 
     return (
         <div className="flex flex-row gap-6 px-9 pt-11 pb-9">

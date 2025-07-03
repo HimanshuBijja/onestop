@@ -8,7 +8,7 @@ import { s } from "motion/react-client";
 import Image from "next/image";
 import Link from "next/link";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import useSWR from "swr";
 import UserCardSkeleton from "lib/app/components/userCardSkeleton";
 
@@ -47,6 +47,9 @@ const ProfileCard = () => {
     const handleToggleMenu = () => {
         setIsOpen(!isOpen);
     };
+    const updateUsername = useCallback((newUsername: string) => {
+        setUsername(newUsername);
+    }, []);
     if(isLoading){
         return <UserCardSkeleton />
     }
@@ -87,6 +90,7 @@ const ProfileCard = () => {
                         source={data.source}
                         refetch={refetch}
                         toggleMenu={handleToggleMenu}
+                        updateUsername={updateUsername}
                     />
                 ) : isOpen ? (
                     <InputCard
@@ -95,6 +99,7 @@ const ProfileCard = () => {
                         source={data.source}
                         refetch={refetch}
                         toggleMenu={handleToggleMenu}
+                        updateUsername={updateUsername}
                     />
                 ) : (
                     <GeeksForGeeksProfile data={data} />
