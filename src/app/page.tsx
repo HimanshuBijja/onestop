@@ -3,9 +3,28 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import Warning from "./components/isMobile";
 
 
 export default function Home() {
+
+    const [isMobile, setIsMobile] = useState(false);
+    function toggleWarning(){
+        setIsMobile(!isMobile);
+    }
+    // const windowWidth = window.innerWidth;
+    useEffect(() => {
+        // Safe to access `window` here (only runs on client)
+        const handleResize = () => {
+          setIsMobile(window.innerWidth < 1024);
+        };
+    
+        handleResize(); // Check once on mount
+    
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+      }, []);
     return (
         <div>
             <div className="fixed inset-0 h-screen w-screen -z-20 bg-gradient-to-b from-background from-50% to-[#282828] to-100%" />
@@ -47,6 +66,7 @@ export default function Home() {
                     </div>
                 </div>
             </div>
+            {isMobile && <Warning toggle={toggleWarning}/>}
         </div>
     );
 }
