@@ -74,24 +74,25 @@ export default function Home() {
 function ButtonFilled() {
     const router = useRouter();
     return (
-        <div className="bg-green-text/70 hover:bg-green-text text-background px-13 py-3 rounded-[30px] font-medium transition-all duration-300">
-            <button onClick={() => {
-                router.push("/contests");
-            }}>
+        <div className="bg-green-text/70 hover:bg-green-text text-background px-13 py-3 rounded-[30px] font-medium transition-all duration-300"
+        onClick={() => {
+            router.push("/contests");
+        }}>
+            
                 View Contests
-            </button>
+            
         </div>
     )
 }
 function ButtonHollow() {
     const router = useRouter();
     return (
-        <div className="bg-transparent text-foreground px-13 py-3 rounded-[30px] font-medium border border-green-text hover:bg-surface/50 hover:border-green-text/50 transition-all duration-300">
-            <button onClick={() => {
-                router.push("/profiles");
-            }}>
+        <div className="bg-transparent text-foreground px-13 py-3 rounded-[30px] font-medium border border-green-text hover:bg-surface/50 hover:border-green-text/50 transition-all duration-300"
+        onClick={() => {
+            router.push("/profiles");
+        }}>
                 Get Started
-            </button>
+            
         </div>
     )
 }
