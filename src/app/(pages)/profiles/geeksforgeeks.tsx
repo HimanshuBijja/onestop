@@ -8,21 +8,15 @@ import { s } from "motion/react-client";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useSWR from "swr";
 import UserCardSkeleton from "lib/app/components/userCardSkeleton";
 
 export default function GeeksforGeeksUserData() {
     return (
-        <Suspense
-            fallback={
-                <div>
-                    <UserCardSkeleton />
-                </div>
-            }
-        >
+        
             <ProfileCard />
-        </Suspense>
+        
     );
 }
 
@@ -35,12 +29,11 @@ const ProfileCard = () => {
         const stored = localStorage.getItem("geeksforgeeks") ?? "";
         setUsername(stored);
     }, []);
-    const { data, error, mutate } = useSWR(
+    const { data, error, mutate , isLoading} = useSWR(
         `/api/user/geeksforgeeks?gfgusername=${username}`,
         fetcher,
         {
-            suspense: true,
-            // // fallbackData: {},
+            
             revalidateOnFocus: false,
             revalidateOnReconnect: false,
             revalidateIfStale: false,
@@ -54,6 +47,9 @@ const ProfileCard = () => {
     const handleToggleMenu = () => {
         setIsOpen(!isOpen);
     };
+    if(isLoading){
+        return <UserCardSkeleton />
+    }
 
     return (
         <div>
