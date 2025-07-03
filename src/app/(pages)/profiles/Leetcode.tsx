@@ -11,12 +11,7 @@ import useSWR from "swr";
 import UserCardSkeleton from "lib/app/components/userCardSkeleton";
 
 export default function LeetcodeUserData() {
-    return (
-        
-        
-            <ProfileCard />
-        
-    );
+    return <ProfileCard />;
 }
 
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
@@ -29,11 +24,10 @@ const ProfileCard = () => {
         const stored = localStorage.getItem("leetcode") ?? "";
         setUsername(stored);
     }, []);
-    const { data, error, mutate , isLoading} = useSWR(
+    const { data, error, mutate, isLoading } = useSWR(
         `/api/user/leetcode?lcusername=${username}`,
         fetcher,
         {
-            
             revalidateOnFocus: false,
             revalidateOnReconnect: false,
             revalidateIfStale: false,
@@ -51,8 +45,8 @@ const ProfileCard = () => {
     const handleToggleMenu = () => {
         setIsOpen(!isOpen);
     };
-    if(isLoading){
-        return <UserCardSkeleton />
+    if (isLoading) {
+        return <UserCardSkeleton />;
     }
 
     return (
@@ -74,7 +68,9 @@ const ProfileCard = () => {
                         </div>
                     </div>
                     <div className="pt-2 pr-2">
-                        {isOpen ? (
+                        {!data.success ? (
+                            <X size={26} onClick={handleToggleMenu} />
+                        ) : isOpen ? (
                             <X size={26} onClick={handleToggleMenu} />
                         ) : (
                             <AlignJustify
