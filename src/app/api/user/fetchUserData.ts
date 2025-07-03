@@ -62,7 +62,7 @@ export async function fetchUserData({
             try {
                 const geeksforgeeksFullResponse = await axios.get(
                     // `https://authapi.geeksforgeeks.org/api-get/user-profile-info/?handle=${gfgusername}&article_count=false&redirect=true`,
-                    `https://www.geeksforgeeks.org/gfg-assets/_next/data/SEZyqWa8pXrnCAKT5xxuV/user/${gfgusername}.json`,
+                    `https://www.geeksforgeeks.org/gfg-assets/_next/data/kPIBY_e295Ksh2RjZIzKa/user/${gfgusername}.json`,
 
                     {
                         headers: {

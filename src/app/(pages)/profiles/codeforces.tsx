@@ -10,32 +10,26 @@ import Link from "next/link";
 import { Suspense, useEffect, useState } from "react";
 import useSWR from "swr";
 
-export default function Profiles() {
+export default function CodeforcesUserData() {
     return (
-        <section className="relative py-24 px-4">
-            <div className="flex justify-center">
-                <div className="grid grid-cols-2 gap-x-10 gap-y-15">
-                    <Suspense
-                        fallback={
-                            <div>
-                                <Loading />
-                            </div>
-                        }
-                    >
-                        <ProfileCard />
-                    </Suspense>
+        <Suspense
+            fallback={
+                <div>
+                    <Loading />
                 </div>
-            </div>
-        </section>
+            }
+        >
+            <ProfileCard />
+        </Suspense>
     );
 }
 
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
 const ProfileCard = () => {
-    const username = localStorage.getItem("leetcode");
+    const username = localStorage.getItem("codeforces");
     const { data, error, mutate } = useSWR(
-        `/api/user/leetcode?lcusername=${username}`,
+        `/api/user/codeforces?cfusername=${username}`,
         fetcher,
         {
             suspense: true,
@@ -61,7 +55,7 @@ const ProfileCard = () => {
                     <div className="flex gap-8 items-center">
                         <div>
                             <Image
-                                src="/leetcode_logo.png"
+                                src="/codeforces_logo.png"
                                 alt="profile"
                                 width={60}
                                 height={60}
@@ -100,39 +94,41 @@ const ProfileCard = () => {
                         toggleMenu={handleToggleMenu}
                     />
                 ) : (
-                    <LeetcodeProfile data={data} />
+                    <CodeForcesProfile data={data} />
                 )}
                 {/* contains all the data */}
             </div>
             <div className="text-small pt-1 px-7">
-                <Link href="https://leetcode.com/">
-                    <div>Leetcode</div>
+                <Link href="https://codeforces.com/">
+                    <div>Codeforces</div>
                 </Link>
             </div>
         </div>
     );
 };
 
-const LeetcodeProfile = ({ data }: { data: any }) => {
-    const ranking = data.lcattendedContests[0]?.ranking ?? 0;
-    const rating = data.lcattendedContests[0]?.rating ?? 0;
-    const problemsSolved = data.lcProblemsSolved.problemsSolved[0]?.count ?? 0;
-    const contestsParticipated = data.lcattendedContests.length;
+const CodeForcesProfile = ({ data }: { data: any }) => {
+
+    const userData = data.data.result[0];
+    const rating = userData.rating;
+    const maxRating = userData.maxRating;
+    const rank = (userData.rank).charAt(0).toUpperCase() + (userData.rank).slice(1);
+    const friendOfCount = userData.friendOfCount;
 
     return (
         <div className="flex flex-row gap-6 px-9 pt-11 pb-9">
             <div className="flex flex-col gap-4">
-                <div>Rank :</div>
                 <div>Rating :</div>
-                <div>Problems Solved :</div>
-                <div>Contests Participated :</div>
+                <div>Max Rating :</div>
+                <div>Rank :</div>
+                <div>Friends :</div>
             </div>
             <div className="flex flex-col gap-4">
-                <div>{ranking}</div>
                 <div>{rating}</div>
-                <div>{problemsSolved}</div>
-                <div>{contestsParticipated}</div>
+                <div>{maxRating}</div>
+                <div>{rank}</div>
+                <div>{friendOfCount}</div>
             </div>
         </div>
     );
-};
+};;

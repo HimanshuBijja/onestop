@@ -3,12 +3,10 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { RecoilRoot } from "recoil";
 
 
 export default function Home() {
     return (
-        <RecoilRoot>
         <div>
             <div className="fixed inset-0 h-screen w-screen -z-20 bg-gradient-to-b from-background from-50% to-[#282828] to-100%" />
             <Image
@@ -50,7 +48,6 @@ export default function Home() {
                 </div>
             </div>
         </div>
-        </RecoilRoot>
     );
 }
 
