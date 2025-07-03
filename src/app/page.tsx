@@ -34,7 +34,7 @@ export default function Home() {
                 fill
                 className="fixed inset-0 h-screen w-screen -z-10"
             />
-            <div className="grid grid-cols-12 gap-4 mt-32">
+            <div className="grid grid-cols-12 gap-4 mt-15">
                 <div className="col-span-5">
                     <Image
                         src="/heroImage.png"
