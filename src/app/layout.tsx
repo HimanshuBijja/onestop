@@ -44,6 +44,7 @@ export default function RootLayout({
         className={`${rosarivo.variable} container mx-auto xl:max-w-[74vw]`}
       >
         <NavBar />
+        
         {children}
       </body>
     </html>

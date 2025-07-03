@@ -1,4 +1,5 @@
-import NavBar from "../components/navBar";
+"use client";
+
 
 export default function RootLayout({
   children,
@@ -9,7 +10,7 @@ export default function RootLayout({
     <>
       
       <main>
-        {children}
+          {children}
       </main>
     </>
   );
