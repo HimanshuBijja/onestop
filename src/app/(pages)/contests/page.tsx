@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import ContestCard from "lib/app/components/contestCard";
 import Loading from "lib/app/components/loading";
+import useSWR from "swr";
 
 interface RenderContestType {
     startTime: number;
@@ -12,33 +13,47 @@ interface RenderContestType {
     link: string;
 }
 
+const fetcher = (url: string) => axios.get(url).then((res) => res.data);
+
 export default function AllContests() {
-    const [upcomingContests, setUpcomingContests] = useState<
-        RenderContestType[]
-    >([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
+    // const [upcomingContests, setUpcomingContests] = useState<
+    //     RenderContestType[]
+    // >([]);
+    // const [loading, setLoading] = useState(true);
+    // const [error, setError] = useState(false);
 
-    useEffect(() => {
-        const fetchContests = async () => {
-            try {
-                const response = await axios.get(
-                    `/api/contest?source=all&day=all&month=all&sortBy=startTime&sortOrder=asc`
-                );
-                setUpcomingContests(response.data.upcomingContests);
-                setLoading(false);
-            } catch (error) {
-                setError(true);
-                setLoading(false);
-            }
-        };
+    const { data, error, mutate , isLoading} = useSWR(
+        `/api/contest?source=all&day=all&month=all&sortBy=startTime&sortOrder=asc`,
+        fetcher,
+        {
+            
+            revalidateOnFocus: false,
+            revalidateOnReconnect: false,
+            revalidateIfStale: false,
+            revalidateOnMount: true,
+        }
+    );
 
-        fetchContests();
-    }, []);
+    // useEffect(() => {
+    //     const fetchContests = async () => {
+    //         try {
+    //             const response = await axios.get(
+    //                 `/api/contest?source=all&day=all&month=all&sortBy=startTime&sortOrder=asc`
+    //             );
+    //             setUpcomingContests(response.data.upcomingContests);
+    //             // setLoading(false);
+    //         } catch (error) {
+                
+    //             // setLoading(false);
+    //         }
+    //     };
+
+    //     fetchContests();
+    // }, []);
 
 
 
-    if (loading) {
+    if (isLoading) {
         return <Loading />;
     }
 
@@ -49,7 +64,7 @@ export default function AllContests() {
     return (
         <section className="relative py-24 px-4">
             <div className="flex flex-col gap-7 justify-center">
-                {upcomingContests.map((x: RenderContestType, index: number) => (
+                {data.upcomingContests.map((x: RenderContestType, index: number) => (
                     <RenderContest
                         source={x.source}
                         title={x.title}

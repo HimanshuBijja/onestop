@@ -21,7 +21,8 @@ export default function NavBar() {
             </Link>
             <div className="flex gap-12 items-center">
                 <Link href="/contests">Contests</Link>
-                <ProfileCard />
+                <Link href="/profiles"><ProfileCard /></Link>
+                
             </div>
         </section>
     );
@@ -32,7 +33,7 @@ function ProfileCard() {
         <div className="bg-green-text rounded-normal px-5 py-1.5 flex items-center gap-3">
             <div className="rounded-full bg-surface w-3 h-3" />
             <div className="text-foreground-dark font-medium">
-                <Link href="/profiles">Profile</Link>
+                Profile
             </div>
         </div>
     );

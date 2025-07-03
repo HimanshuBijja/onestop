@@ -70,8 +70,10 @@ export default function ContestCard({
 
 function VisitButton({ url }: { url: string }) {
     return (
-        <div className="bg-green-text/70 hover:bg-green-text transition-all duration-300 rounded-normal px-7 py-2 flex items-center text-foreground-dark font-medium">
-            <Link href={url}>Visit</Link>
-        </div>
+        <Link href={url}>
+            <div className="bg-green-text/70 hover:bg-green-text transition-all duration-300 rounded-normal px-7 py-2 flex items-center text-foreground-dark font-medium">
+                Visit
+            </div>
+        </Link>
     );
 }
