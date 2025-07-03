@@ -29,8 +29,8 @@ export default function InputCard({
         localStorage.setItem(source, username);
         if (fetching) {
             refetch();
-            toggleMenu();
         }
+        toggleMenu();
         setLoading(true);
 
         // setFetching(true);
@@ -58,7 +58,9 @@ export default function InputCard({
             />
             <button
                 className="absolute right-2 top-1/2 transform -translate-y-1/2 z-50"
-                onClick={handleSubmit}
+                onClick={ ()=>{handleSubmit();
+                    success && toggleMenu()
+                }}
             >
                 <motion.div
                     className={`${

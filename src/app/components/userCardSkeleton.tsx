@@ -34,7 +34,7 @@ const ProfileCard = () => {
                 <Data />
             </div>
             <div className="text-small pt-1 px-7">
-                
+                <div className=" w-15 h-4"></div>
             </div>
         </div>
     );
