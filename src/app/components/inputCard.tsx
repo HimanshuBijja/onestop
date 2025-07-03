@@ -22,7 +22,8 @@ export default function InputCard({
     const [username, setUsername] = useState<string>(
         localStorage.getItem(source) || ""
     );
-    const [loading, setLoading] = useState<boolean>(false);
+    const [storedUsername, setStoredUsername] = useState<string | boolean>(localStorage.getItem(source) || true);
+    // const [loading, setLoading] = useState<boolean>(false);
     // const [fetching, setFetching] = useState<boolean>(true);
 
     const handleSubmit = () => {
@@ -37,7 +38,7 @@ export default function InputCard({
             refetch();
         }
         // toggleMenu();
-        setLoading(true);
+        // setLoading(true);
 
         // setFetching(true);
     };
@@ -45,7 +46,7 @@ export default function InputCard({
     return (
         <div className="relative mt-20 mx-5">
             <div className="absolute z-50 top-0 left-5 transform -translate-y-1/2 bg-surface px-2">
-                {success ? (
+                {success || storedUsername === true? (
                     <div className="text-green-text">Username</div>
                 ) : (
                     <div className="text-red">{label}</div>
@@ -54,7 +55,7 @@ export default function InputCard({
             <input
                 type="text"
                 className={` border-2 rounded-2xl h-15 w-full px-5 focus:outline-none ${
-                    success
+                    success || storedUsername === true
                         ? "border-green-text/60 focus:border-green-text"
                         : "border-red/60 focus:border-red"
                 }`}
@@ -70,7 +71,7 @@ export default function InputCard({
             >
                 <motion.div
                     className={`${
-                        success ? "bg-green-text" : "bg-red"
+                        success || storedUsername === true? "bg-green-text" : "bg-red"
                     } rounded-lg w-[43px] h-[43px]`}
                     whileHover={{ scale: 1.04 }}
                     whileTap={{ scale: 0.9 }}
