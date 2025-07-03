@@ -20,7 +20,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(lcDetails);
 }
 
-export const fetchLeetcode = async (lcusername: string) => {
+const fetchLeetcode = async (lcusername: string) => {
     if (!lcusername) {
         return {
             source: "leetcode",

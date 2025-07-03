@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(gfgDetails);
 }
 
-export const fetchGeeksforgeeks = async (gfgusername: string) => {
+const fetchGeeksforgeeks = async (gfgusername: string) => {
     if (!gfgusername) {
         return {
             source: "geeksforgeeks",

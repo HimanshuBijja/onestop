@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(cfDetails);
 }
 
-export const fetchCodeforces = async (cfusername: string) => {
+const fetchCodeforces = async (cfusername: string) => {
     if (!cfusername) {
         return {
             source: "codeforces",
