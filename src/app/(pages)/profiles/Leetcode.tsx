@@ -6,7 +6,7 @@ import { AlignJustify, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import useSWR from "swr";
 import UserCardSkeleton from "lib/app/components/userCardSkeleton";
 
@@ -23,6 +23,7 @@ const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
 const ProfileCard = () => {
     const [username, setUsername] = useState<string>("");
+    const [isOpen, setIsOpen] = useState<boolean>(false);
 
     useEffect(() => {
         const stored = localStorage.getItem("leetcode") ?? "";
@@ -39,7 +40,11 @@ const ProfileCard = () => {
             revalidateOnMount: true,
         }
     );
-    const [isOpen, setIsOpen] = useState<boolean>(false);
+
+    const updateUsername = useCallback((newUsername: string) => {
+        setUsername(newUsername);
+    }, []);
+
     const refetch = () => {
         mutate();
     };
@@ -86,6 +91,7 @@ const ProfileCard = () => {
                         source={data.source}
                         refetch={refetch}
                         toggleMenu={handleToggleMenu}
+                        updateUsername={updateUsername}
                     />
                 ) : isOpen ? (
                     <InputCard
@@ -94,6 +100,7 @@ const ProfileCard = () => {
                         source={data.source}
                         refetch={refetch}
                         toggleMenu={handleToggleMenu}
+                        updateUsername={updateUsername}
                     />
                 ) : (
                     <LeetcodeProfile data={data} />
