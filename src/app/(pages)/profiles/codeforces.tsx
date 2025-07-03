@@ -9,13 +9,14 @@ import Link from "next/link";
 
 import { Suspense, useEffect, useState } from "react";
 import useSWR from "swr";
+import UserCardSkeleton from "lib/app/components/userCardSkeleton";
 
 export default function CodeforcesUserData() {
     return (
         <Suspense
             fallback={
                 <div>
-                    <Loading />
+                    <UserCardSkeleton />
                 </div>
             }
         >
@@ -27,7 +28,7 @@ export default function CodeforcesUserData() {
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
 const ProfileCard = () => {
-    const username = localStorage.getItem("codeforces");
+    const username = localStorage.getItem("codeforces") ?? "";
     const { data, error, mutate } = useSWR(
         `/api/user/codeforces?cfusername=${username}`,
         fetcher,

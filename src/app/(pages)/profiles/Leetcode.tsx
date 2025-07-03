@@ -2,20 +2,20 @@
 
 import axios from "axios";
 import InputCard from "lib/app/components/inputCard";
-import Loading from "lib/app/components/loading";
 import { AlignJustify, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 import { Suspense, useEffect, useState } from "react";
 import useSWR from "swr";
+import UserCardSkeleton from "lib/app/components/userCardSkeleton";
 
 export default function LeetcodeUserData() {
     return (
         <Suspense
             fallback={
                 <div>
-                    <Loading />
+                    <UserCardSkeleton />
                 </div>
             }
         >
@@ -27,7 +27,7 @@ export default function LeetcodeUserData() {
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
 const ProfileCard = () => {
-    const username = localStorage.getItem("leetcode");
+    const username = localStorage.getItem("leetcode") ?? "";
     const { data, error, mutate } = useSWR(
         `/api/user/leetcode?lcusername=${username}`,
         fetcher,

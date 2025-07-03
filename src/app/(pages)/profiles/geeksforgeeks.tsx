@@ -10,13 +10,14 @@ import Link from "next/link";
 
 import { Suspense, useEffect, useState } from "react";
 import useSWR from "swr";
+import UserCardSkeleton from "lib/app/components/userCardSkeleton";
 
 export default function GeeksforGeeksUserData() {
     return (
         <Suspense
             fallback={
                 <div>
-                    <Loading />
+                    <UserCardSkeleton />
                 </div>
             }
         >
@@ -28,7 +29,7 @@ export default function GeeksforGeeksUserData() {
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
 const ProfileCard = () => {
-    const username = localStorage.getItem("geeksforgeeks");
+    const username = localStorage.getItem("geeksforgeeks") ?? "";
     const { data, error, mutate } = useSWR(
         `/api/user/geeksforgeeks?gfgusername=${username}`,
         fetcher,

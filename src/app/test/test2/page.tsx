@@ -1,7 +1,6 @@
 "use client";
 
 import axios from "axios";
-import InputCard from "lib/app/components/inputCard";
 import Loading from "lib/app/components/loading";
 import { AlignJustify, X } from "lucide-react";
 import Image from "next/image";
@@ -9,6 +8,9 @@ import Link from "next/link";
 
 import { Suspense, useEffect, useState } from "react";
 import useSWR from "swr";
+import UserCardSkeleton from "../../components/userCardSkeleton";
+import Test3 from "../test3/page";
+import { div } from "motion/react-client";
 
 export default function Profiles() {
     return (
@@ -18,7 +20,7 @@ export default function Profiles() {
                     <Suspense
                         fallback={
                             <div>
-                                <Loading />
+                                <UserCardSkeleton />
                             </div>
                         }
                     >
@@ -84,7 +86,7 @@ const ProfileCard = () => {
                     </div>
                 </div>
                 {!data.success ? (
-                    <InputCard
+                    <Test3
                         success={data.success}
                         label={data.msg}
                         source={data.source}
@@ -92,7 +94,7 @@ const ProfileCard = () => {
                         toggleMenu={handleToggleMenu}
                     />
                 ) : isOpen ? (
-                    <InputCard
+                    <Test3
                         success={data.success}
                         label={data.msg}
                         source={data.source}
@@ -100,7 +102,13 @@ const ProfileCard = () => {
                         toggleMenu={handleToggleMenu}
                     />
                 ) : (
-                    <LeetcodeProfile data={data} />
+                    <div>
+                        <LeetcodeProfile data={data} />
+                        <AlignJustify
+                                size={26}
+                                onClick={handleToggleMenu}
+                            />
+                    </div>
                 )}
                 {/* contains all the data */}
             </div>
