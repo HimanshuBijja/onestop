@@ -25,7 +25,7 @@ const fetchGeeksforgeeks = async (gfgusername: string) => {
             msg: "Enter Username",
         };
     } else {
-        const hash = "kPIBY_e295Ksh2RjZIzKa"
+        const hash = "t0VJX3rfLcfAcf0KJMe8O"
         try {
             const geeksforgeeksFullResponse = await axios.get(
                 // `https://authapi.geeksforgeeks.org/api-get/user-profile-info/?handle=${gfgusername}&article_count=false&redirect=true`,
