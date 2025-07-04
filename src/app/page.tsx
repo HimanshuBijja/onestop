@@ -1,4 +1,3 @@
-
 "use client";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -6,25 +5,23 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Warning from "./components/isMobile";
 
-
 export default function Home() {
-
     const [isMobile, setIsMobile] = useState(false);
-    function toggleWarning(){
+    function toggleWarning() {
         setIsMobile(!isMobile);
     }
     // const windowWidth = window.innerWidth;
     useEffect(() => {
         // Safe to access `window` here (only runs on client)
         const handleResize = () => {
-          setIsMobile(window.innerWidth < 1024);
+            setIsMobile(window.innerWidth < 1024);
         };
-    
+
         handleResize(); // Check once on mount
-    
+
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
-      }, []);
+    }, []);
     return (
         <div>
             <div className="fixed inset-0 h-screen w-screen -z-20 bg-gradient-to-b from-background from-50% to-[#282828] to-100%" />
@@ -34,15 +31,16 @@ export default function Home() {
                 fill
                 className="fixed inset-0 h-screen w-screen -z-10"
             />
+            <div className="absolute -z-10 bottom-1/2 transform translate-y-1/2 h-[60vh] w-[60vh]">
+                <Image
+                    src="/heroImage.png"
+                    alt="logo"
+                    fill
+                    className="object-contain"
+                />
+            </div>
             <div className="grid grid-cols-12 gap-4 mt-15">
-                <div className="col-span-5">
-                    <Image
-                        src="/heroImage.png"
-                        alt="logo"
-                        width={400}
-                        height={300}
-                    />
-                </div>
+                <div className="col-span-5"></div>
 
                 <div className="col-span-7 flex flex-col gap-10 mt-15 text-center justify-center">
                     <div className="flex flex-row gap-9 text-[50px] justify-center">
@@ -66,7 +64,7 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-            {isMobile && <Warning toggle={toggleWarning}/>}
+            {isMobile && <Warning toggle={toggleWarning} />}
         </div>
     );
 }
@@ -74,25 +72,26 @@ export default function Home() {
 function ButtonFilled() {
     const router = useRouter();
     return (
-        <div className="bg-green-text/70 hover:bg-green-text text-background px-13 py-3 rounded-[30px] font-medium transition-all duration-300"
-        onClick={() => {
-            router.push("/contests");
-        }}>
-            
-                View Contests
-            
+        <div
+            className="bg-green-text/70 hover:bg-green-text text-background px-13 py-3 rounded-[30px] font-medium transition-all duration-300"
+            onClick={() => {
+                router.push("/contests");
+            }}
+        >
+            View Contests
         </div>
-    )
+    );
 }
 function ButtonHollow() {
     const router = useRouter();
     return (
-        <div className="bg-transparent text-foreground px-13 py-3 rounded-[30px] font-medium border border-green-text hover:bg-surface/50 hover:border-green-text/50 transition-all duration-300"
-        onClick={() => {
-            router.push("/profiles");
-        }}>
-                Get Started
-            
+        <div
+            className="bg-transparent text-foreground px-13 py-3 rounded-[30px] font-medium border border-green-text hover:bg-surface/50 hover:border-green-text/50 transition-all duration-300"
+            onClick={() => {
+                router.push("/profiles");
+            }}
+        >
+            Get Started
         </div>
-    )
+    );
 }
